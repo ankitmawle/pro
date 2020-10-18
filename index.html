@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Automated Pharmacy Serivices</title>
+      <!--link rel = "icon" type = "image/png" href = "img/logo-rbg.png" sizes="16x16"-->
+      <link rel="stylesheet" href="css/components.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="css/responsee.css">
+      <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+      <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+      <!-- CUSTOM STYLE -->      
+      <link rel="stylesheet" href="css/template-style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">  
+      <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.min.js"></script>   
+      
+      <style>
+        #location {
+          position: fixed;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0,0,0,0.92);
+          z-index: 2;
+          cursor: pointer;
+        }
+        #pro {
+          position: fixed;
+          display: none;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color:#CCC;
+          z-index: 2;
+          cursor: pointer;
+        }
+       
+
+
+       /* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  justify-content: center;
+  align-items: center;
+  display:flex;
+  
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* The search field */
+#myInput {
+  box-sizing: border-box;
+  
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+    </style> 
+    </head>
+
+   <!--
+    You can change the color scheme of the page. Just change the class of the <body> tag. 
+    You can use this class: "primary-color-white", "primary-color-red", "primary-color-orange", "primary-color-blue", "primary-color-aqua", "primary-color-dark" 
+    -->
+    
+    <!--
+    Each element is able to have its own background or text color. Just change the class of the element.  
+    You can use this class: 
+    "background-white", "background-red", "background-orange", "background-blue", "background-aqua", "background-primary" 
+    "text-white", "text-red", "text-orange", "text-blue", "text-aqua", "text-primary"
+    -->
+   <body class="size-1520 primary-color-red background-dark" onload="overlay()">
+
+      <!-- PREMIUM FEATURES BUTTON -->
+    	<a   href="cart.html" style="position:fixed;top:120px;right:-14px;z-index:10; transform: scale(.5);"><img src="img/cart.png" alt=""><div style="  position: absolute;
+        top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); transform: scale(2);">1</div></a>
+      <!-- HEADER -->
+      <a   href="index.html" style="position:fixed;bottom:2%;left:0px;z-index:10; transform: scale(0.5);"><img src="img/x.png" alt=""></a>
+      
+      
+      <header class="grid">
+        <!-- Top Navigation -->
+        <nav class="s-12 grid background-none background-primary-hightlight">
+           <!-- logo >
+           <a href="index-2.html" class="m-12 l-3">
+              <img src="img/logo.png">
+           </a-->
+           <div class="top-nav s-12 l-9"> 
+              <ul class="top-ul right chevron">
+                <li><a href="index-2.html">Home</a></li>
+                <li><a onclick="del()">Change your location</a></li>
+                <li><a href="join.html">Connect your store with us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li id="logtext"><a  href="login.html">Login</a></li>
+                <li><a href="cart.html">Cart</a></li>
+              </ul>
+           </div>
+        </nav>
+      </header>
+      
+      <!-- MAIN -->
+      <main role="main">
+        <!-- TOP SECTION -->
+        <section class="grid">
+          <!-- Main Carousel -->
+          <div class="s-12 margin-bottom carousel-fade-transition owl-carousel carousel-main carousel-nav-white carousel-hide-arrows background-dark">
+          	<div class="item background-image" style="background-image:url(img/vegup.jpg)">
+              <p class="text-padding text-strong text-white text-s-size-30 text-size-60 text-uppercase background-primary">Automated Pharmacy Serivices</p>
+              <p class="text-padding text-size-20 text-dark text-uppercase background-white">Pharmacy At Your Doorsteps</p>
+            </div>
+          	
+            <div class="item background-image" style="background-image:url(img/vegdown.jpg)">
+              <p class="text-padding text-strong text-white text-s-size-30 text-size-60 text-uppercase background-primary">Welcome to Telemedserv</p>
+              <p class="text-padding text-size-20 text-dark text-uppercase background-white">Sell and Buy Medicines directly from your home</p>
+            </div>
+          </div>  
+        </section>
+        
+        
+        <!-- SECTION 1 -->
+        <section class="grid margin-bottom-20" onload="htm()" id="shophtml">
+         
+            <!-- Contact Information-->
+            
+            <h2 class="s-12  text-thin text-size-30 text-blue text-Lowercase margin-top-bottom-40 center text-center">
+              <b>Select from the shops in your locality</b>
+         </h2> 
+     
+         <section id="stores" class="grid margin text-center">
+            
+         </section>
+     
+     <div id="location" >
+         <p class="s-12  text-strong text-size-30 text-white text-uppercase margin-top-bottom-40 center text-center" >
+           <b>
+               Let Us Know Your Nearest Taluka place
+           </b>  
+             </p>
+            
+             <section  class="grid margin">
+                 <div onclick="getLocation()" class="s-12 m-6 padding-2x vertical-center margin-bottom background-blue">
+                  <h3 class="text-strong text-white text-size-20 text-line-height-1 margin-bottom-30 text-uppercase">
+                      Click Here to Automatically Select your nearest taluka based on your location</h3>
+                      
+                  </div>
+                 <div onclick="Manual()"class="s-12 m-6  padding-2x vertical-center margin-bottom background-orange">
+                   <h3 class="text-strong text-white text-size-20 text-line-height-1 margin-bottom-30 text-uppercase">Click here to manually select your Taluka</h3>
+                 </div>
+             </section>
+             <div class="m-12 l-7 center">
+               <button style="display: none;" onclick="city()" class="s-12 padding-2x background-white text-center" id="city"><b>No City Yet Selected</b></button>
+               <div  style="display: none;" id="sel" class="s-12 padding-2x background-white text-center">
+                 <div class="Dropdown">
+                 <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                 
+                 <div id="myDropdown" class="dropdown-content">
+                   <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                   
+                 </div>
+               </div>
+               </div>
+             </div>
+     
+     
+         </div>
+              
+
+        </section>
+        
+ 
+          
+          
+      
+      </main>
+      
+      <script>
+        var y = document.getElementById("city");
+        var k;
+        var locid;
+          function overlay(){
+              document.getElementById("location").style.display = "block";
+              var loc=getCookie("loc");
+              document.getElementById("city").style.display = "none";
+              if(loc!==""){
+                  document.getElementById("location").style.display = "none";
+                  shops();
+              }
+
+
+
+          }
+
+          function shops() {
+  
+  var looc=getCookie("locid");
+  document.getElementById("stores").innerHTML='<div class="loader"></div>';
+  var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       var shops= this.responseText;
+       var m;
+       shops=shops.slice(0,-1);
+       shops=shops.split(";");
+       var inner="";
+       var i=0;
+       var j=shops.length-1;
+       for(m of shops){
+         if(i<j){
+         i++;  
+         var z=m.split(",");
+         inner+= " <div onclick='ss("+z[0]+")' class='s-12 m-6 l-3 padding-2x vertical-center margin-bottom background-";
+         if(i%2==0){
+           inner+="blue";
+         }
+         else{
+           inner+="orange";
+         }
+         inner+="'><h3 class='text-strong text-white text-size-30 text-line-height-1 margin-bottom-30 text-uppercase'>";
+         inner+= z[1];
+         inner+="<br></h3><h4 class='text-strong text-white text-size-20 text-line-height-1 margin-bottom-30 '>";
+         inner+= z[2];
+         inner+="</h4> </div>";
+       }
+       }
+       document.getElementById("stores").innerHTML=inner;
+
+
+       }
+      
+    };
+    xmlhttp.open("GET", "shops.php?"+"q="+looc, true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+   
+}
+
+function getCookie(cname) {
+var name = cname + "=";
+var decodedCookie = decodeURIComponent(document.cookie);
+var ca = decodedCookie.split(';');
+for(var i = 0; i < ca.length; i++) {
+  var c = ca[i];
+  while (c.charAt(0) == ' ') {
+    c = c.substring(1);
+  }
+  if (c.indexOf(name) == 0) {
+    return c.substring(name.length, c.length);
+  }
+}
+return "";
+}
+
+        
+        
+
+function getLocation() {
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+  y.innerHTML = "Geolocation is not supported by this browser. Please select manually";
+  
+}
+}
+function Manual(){
+document.getElementById("city").style.display = "none";
+document.getElementById("sel").style.display = "block";
+document.getElementById("myDropdown").innerHTML='<div class="loader"></div>';
+var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     ll= this.responseText;
+
+
+     document.getElementById("myDropdown").innerHTML = ll;
+       }
+    
+  };
+  xmlhttp.open("GET", "loc.php", true);
+  //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send();
+
+}
+
+function showPosition(position) {
+
+//Create query for the API.
+var latitude = "latitude=" + position.coords.latitude;
+var longitude = "&longitude=" + position.coords.longitude;
+var query = latitude + longitude + "&localityLanguage=en";
+console.log(position);
+const Http = new XMLHttpRequest();
+
+var bigdatacloud_api =
+  "https://api.bigdatacloud.net/data/reverse-geocode-client?";
+
+bigdatacloud_api += query;
+
+Http.open("GET", bigdatacloud_api);
+Http.send();
+y.innerHTML='<div class="loader"></div>';
+Http.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    //console.log(myObj);
+    k=myObj.locality;
+    y.innerHTML ="Proceed with "+ myObj.locality;
+    document.getElementById("city").style.display = "block";
+    document.getElementById("sel").style.display = "none";
+  }
+};
+}
+
+function setCookie(cname,cvalue,exdays) {
+var d = new Date();
+d.setTime(d.getTime() + (exdays*24*60*60*1000));
+var expires = "expires=" + d.toGMTString();
+document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function city(){
+
+document.getElementById("location").innerHTML='<div class="loader"></div>';
+var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     locid= this.responseText;
+     setCookie("loc",k,1);
+     setCookie("locid",locid,1);
+     document.getElementById("location").style.display = "none";
+     shops();
+    }
+    
+  };
+  xmlhttp.open("GET", "locid.php?q="+k, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send();
+
+}
+function ss(sh){
+  window.location="shop?id=" +sh;
+
+
+}
+function sss(lll){
+      k=lll;
+      y.innerHTML ="Proceed with "+ lll;
+      document.getElementById("city").style.display = "block";
+      document.getElementById("sel").style.display = "none";
+
+
+}
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+  
+        
+        
+        
+        
+       
+        
+         
+        
+      </footer> 
+      <div class="s-12 text-center margin-bottom">
+        <p class="text-size-12"></p>
+        <p class="text-size-12"></p>
+        <p><a class="text-size-12 text-primary-hover" href="index.html" title="DITPL">Automated Pharmacy Serivices</a></p>
+      </div>                                                                 
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+
+   </body>
+
+</html>
